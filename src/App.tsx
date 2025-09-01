@@ -12,12 +12,10 @@ export default function App() {
       return setError("Please select a file.");
     }
     setFile(e.target.files[0] as any);
-    setText(""); // Limpa o texto se um arquivo for selecionado
   };
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
-    setFile(null); // Limpa o arquivo se o texto for digitado
   };
  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +33,7 @@ export default function App() {
     if (file) {
       formData.append("file", file);
     } else {
-      formData.append("text", text);
+      formData.append("email_text", text);
     }
 
     try {
@@ -128,7 +126,7 @@ export default function App() {
                 </strong>{" "}
                 <span
                   className={
-                    result.category === "Productive"
+                    result.category === "Produtivo"
                       ? "text-green-600 font-bold"
                       : "text-orange-600 font-bold"
                   }
