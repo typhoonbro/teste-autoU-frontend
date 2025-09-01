@@ -32,7 +32,8 @@ export default function App() {
     const formData = new FormData();
     if (file) {
       formData.append("file", file);
-    } else {
+    } 
+    if (text) {
       formData.append("email_text", text);
     }
 
