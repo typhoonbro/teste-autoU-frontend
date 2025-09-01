@@ -1,75 +1,75 @@
-
 import React from "react";
 
 interface EmailFormProps {
-   text: string;
-    setText: React.Dispatch<React.SetStateAction<string>>;
-    file: File | null;
-    setFile: React.Dispatch<React.SetStateAction<File | null>>;
-    isLoading: boolean;
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    error: string;
-    setError: React.Dispatch<React.SetStateAction<string>>;
-    result: { category: string; suggested_response: string };
-    setResult: React.Dispatch<React.SetStateAction<{ category: string; suggested_response: string }>>;
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+  file: File | null;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  error: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+  result: { category: string; suggested_response: string };
+  setResult: React.Dispatch<
+    React.SetStateAction<{ category: string; suggested_response: string }>
+  >;
 }
 
-export default function EmailForm(props: EmailFormProps) {  
+export default function EmailForm(props: EmailFormProps) {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      return props.setError("Please select a file.");
+    }
+    props.setFile(e.target.files[0] as any);
+  };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files || e.target.files.length === 0) {
-            return props.setError("Please select a file.");
-        }
-        props.setFile(e.target.files[0] as any);
-    };
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.setText(e.target.value);
+  };
 
-      const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.setText(e.target.value);
-      };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!props.text && !props.file) {
+      props.setError("Por favor, escreva uma mensagem ou anexe um arquivo");
+      return;
+    }
 
-      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!props.text && !props.file) {
-          props.setError("Por favor, escreva uma mensagem ou anexe um arquivo");
-          return;
-        }
+    props.setIsLoading(true);
+    props.setError("");
+    props.setResult({ category: "", suggested_response: "" });
 
-        props.setIsLoading(true);
-        props.setError("");
-        props.setResult({ category: "", suggested_response: "" });
+    const formData = new FormData();
+    if (props.file) {
+      formData.append("file", props.file);
+    }
+    if (props.text) {
+      formData.append("email_text", props.text);
+    }
 
-        const formData = new FormData();
-        if (props.file) {
-          formData.append("file", props.file);
-        }
-        if (props.text) {
-          formData.append("email_text", props.text);
-        }
+    try {
+      const response = await fetch(import.meta.env.VITE_API_URL, {
+        method: "POST",
+        body: formData,
+      });
 
-        try {
-          const response = await fetch("http://localhost:8000/process-email/", {
-            method: "POST",
-            body: formData,
-          });
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || "An error occurred.");
+      }
 
-          if (!response.ok) {
-            const errData = await response.json();
-            throw new Error(errData.detail || "An error occurred.");
-          }
-
-          const data = await response.json();
-          props.setResult(data);
-        } catch (err: any) {
-          props.setError(err.message || "An unknown error occurred.");
-        } finally {
-          props.setIsLoading(false);
-        }
-      };
-    return (
-      <>
+      const data = await response.json();
+      props.setResult(data);
+    } catch (err: any) {
+      props.setError(err.message || "An unknown error occurred.");
+    } finally {
+      props.setIsLoading(false);
+    }
+  };
+  return (
+    <>
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Contato
-        </h1>
+        Contato
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -116,6 +116,6 @@ export default function EmailForm(props: EmailFormProps) {
           </button>
         </div>
       </form>
-      </>
-    );
-} 
+    </>
+  );
+}
