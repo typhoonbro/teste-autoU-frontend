@@ -105,7 +105,15 @@ export default function EmailForm(props: EmailFormProps) {
             className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
         </div>
-
+        <div className="flex items-center justify-center">
+          <p className="text-gray-600 text-sm mb-4 text-justify">
+            Caso você esteja testando no ambiente de produção, tenha em mente
+            que a API pode demorar até 30 segundos para responder a primeira
+            requisição. Devido ao fato de que o servidor pode estar em "sleep
+            mode" por conta do plano gratuito da plataforma de hospedagem. Se
+            receber um erro de cominicação, por favor, tente novamente.
+          </p>
+        </div>
         <div className="flex items-center justify-center">
           <button
             type="submit"
