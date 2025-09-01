@@ -34,6 +34,7 @@ npm run dev
 ## **Run in your browser**
 http://localhost:5173
 
+--- 
 
 ## **Next Steps / Improvements**
 
@@ -42,3 +43,9 @@ http://localhost:5173
 - Unit and integration testing
 
 - Performance optimization
+
+## Backend
+
+https://github.com/typhoonbro/teste-autoU-backend
+
+---
