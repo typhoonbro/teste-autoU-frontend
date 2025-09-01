@@ -4,11 +4,8 @@ import React from "react";
 export default function EmailForm(props: {
     text: string;
     setText: React.Dispatch<React.SetStateAction<string>>;
-    file: null;
+    file: File | null;
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
-    handleTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     isLoading: boolean;
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     error: string;

@@ -7,8 +7,8 @@ export default function App() {
   const [result, setResult] = useState({category: "", suggested_response: ""});
 
   const [error, setError] = useState("");
-  const [text, setText] = useState("");
-  const [file, setFile] = useState(null);
+  const [text, setText] = useState<string>("");
+  const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -19,7 +19,7 @@ export default function App() {
         Contato 
         </h1>
 
-        <EmailForm setResult={setResult} setError={setError} error={error} result={result} setText={setText} text={text} setFile={setFile} file={file} setIsLoading={setIsLoading} isLoading={isLoading}/>
+        <EmailForm setResult={setResult} setError={setError} error={error} result={result} setText={setText} text={text} setFile={setFile} file={file} setIsLoading={setIsLoading} isLoading={isLoading} />
 
         {error && (
           <div className="mt-6 p-4 bg-red-100 text-red-700 rounded">
