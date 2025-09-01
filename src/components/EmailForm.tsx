@@ -1,8 +1,8 @@
 
 import React from "react";
 
-export default function EmailForm(props: {
-    text: string;
+interface EmailFormProps {
+   text: string;
     setText: React.Dispatch<React.SetStateAction<string>>;
     file: File | null;
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
@@ -12,7 +12,9 @@ export default function EmailForm(props: {
     setError: React.Dispatch<React.SetStateAction<string>>;
     result: { category: string; suggested_response: string };
     setResult: React.Dispatch<React.SetStateAction<{ category: string; suggested_response: string }>>;
-}) {  
+}
+
+export default function EmailForm(props: EmailFormProps) {  
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || e.target.files.length === 0) {
@@ -64,6 +66,10 @@ export default function EmailForm(props: {
         }
       };
     return (
+      <>
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Contato
+        </h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -83,8 +89,6 @@ export default function EmailForm(props: {
             placeholder="Escreva sua mensagem"
           />
         </div>
-
-        <div className="text-center my-4 font-semibold text-gray-500">OR</div>
 
         <div className="mb-6">
           <label
@@ -108,9 +112,10 @@ export default function EmailForm(props: {
             disabled={props.isLoading}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline disabled:bg-blue-300"
           >
-            {props.isLoading ? "Processando..." : "Email enviado"}
+            {props.isLoading ? "Processando..." : "Enviar"}
           </button>
         </div>
       </form>
+      </>
     );
 } 
