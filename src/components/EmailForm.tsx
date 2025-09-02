@@ -111,7 +111,7 @@ export default function EmailForm(props: EmailFormProps) {
             que a API pode demorar até 30 segundos para responder a primeira
             requisição. Devido ao fato de que o servidor pode estar em "sleep
             mode" por conta do plano gratuito da plataforma de hospedagem. Se
-            receber um erro de cominicação, por favor, tente novamente.
+            receber um erro de comunicação, por favor, tente novamente.
           </p>
         </div>
         <div className="flex items-center justify-center">
