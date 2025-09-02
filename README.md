@@ -1,6 +1,8 @@
-# Teste AutoU Frontend 🚀
+# Email Companion Frontend 🚀
 
-Frontend for the **AutoU test**, built with **React** and **Vite**. Modern and responsive prototype, ready for API integration.
+Frontend Email Companion app, built with **React** and **Vite**. Modern and responsive prototype, ready for API integration.
+
+Helps with auto classification of email's as productive or not. Gives a response suggestion for a employee to quickle respond and deal with the daily workload of email's.
 
 ---
 
